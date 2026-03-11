@@ -1,0 +1,8 @@
+cl-amm - Constant Product Automated Market Maker
+Copyright (c) 2024-2026 Parkian Company LLC. All rights reserved.
+
+This software is licensed under the BSD 3-Clause License.
+See the LICENSE file for the full license text.
+
+This project implements an Automated Market Maker using the constant product
+formula (x * y = k), commonly known as the Uniswap V2 style AMM.
