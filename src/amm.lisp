@@ -9,8 +9,8 @@
 ;;; Helper Functions
 ;;; ===================================================================
 
-(defun isqrt (n)
-  "Integer square root using Newton's method."
+(defun amm-isqrt (n)
+  "Integer square root using Newton's method with AMM-specific error handling."
   (cond
     ((< n 0) (error 'invalid-amount-error :amount n :reason "Cannot take sqrt of negative"))
     ((< n 2) n)
@@ -58,7 +58,7 @@
          (ordered-amount-a (if (string< token-a token-b) amount-a amount-b))
          (ordered-amount-b (if (string< token-a token-b) amount-b amount-a))
          ;; Calculate initial LP shares: sqrt(x * y) - MIN_LIQUIDITY
-         (geometric-mean (isqrt (* ordered-amount-a ordered-amount-b)))
+         (geometric-mean (amm-isqrt (* ordered-amount-a ordered-amount-b)))
          (lp-shares (- geometric-mean +min-liquidity+))
          (now (get-current-time)))
 
