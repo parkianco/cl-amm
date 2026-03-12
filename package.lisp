@@ -13,6 +13,7 @@
    ;; Liquidity Pool
    #:liquidity-pool
    #:make-liquidity-pool
+   #:liquidity-pool-p
    #:liquidity-pool-id
    #:liquidity-pool-token-a
    #:liquidity-pool-token-b
@@ -36,6 +37,7 @@
    ;; Swap Result
    #:swap-result
    #:make-swap-result
+   #:swap-result-p
    #:swap-result-amount-out
    #:swap-result-fee-amount
    #:swap-result-new-reserve-a

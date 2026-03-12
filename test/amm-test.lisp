@@ -178,10 +178,10 @@
   (cl-amm:clear-registry)
   (cl-amm:create-pool "ETH" "USDC" 1000000 2000000000)
   ;; Small trade should have small impact
-  (let ((small-impact (cl-amm:calculate-price-impact "ETH/USDC" 100 "ETH")))
-    (assert-true (< small-impact 10) "Small trade should have <10 bps impact"))
-  ;; Large trade should have larger impact
-  (let ((large-impact (cl-amm:calculate-price-impact "ETH/USDC" 100000 "ETH")))
+  (let* ((small-impact (cl-amm:calculate-price-impact "ETH/USDC" 100 "ETH"))
+         ;; Large trade should have larger impact
+         (large-impact (cl-amm:calculate-price-impact "ETH/USDC" 100000 "ETH")))
+    (assert-true (< small-impact 10) "Small trade should have <10 bps impact")
     (assert-true (> large-impact small-impact))))
 
 ;;; ===================================================================
