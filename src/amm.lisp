@@ -200,6 +200,13 @@
     (when (or (zerop reserve-in) (zerop reserve-out))
       (error 'zero-liquidity-error :pool-id pool-id :message "Pool has zero reserves"))
 
+    (when (> amount-in reserve-in)
+      (error 'insufficient-liquidity-error
+             :pool-id pool-id
+             :required amount-in
+             :available reserve-in
+             :message "Input amount exceeds pool reserve"))
+
     ;; Calculate fee
     (let* ((fee-amount (floor (* amount-in fee-bps) +bps-base+))
            (amount-in-after-fee (- amount-in fee-amount))
@@ -220,7 +227,8 @@
                                  0
                                  (abs (floor (* (- price-before price-after) 10000) price-before)))))
 
-      (when (>= amount-out reserve-out)
+      (when (or (>= amount-out reserve-out)
+                (<= new-reserve-out +min-liquidity+))
         (error 'insufficient-liquidity-error
                :pool-id pool-id
                :required amount-out
