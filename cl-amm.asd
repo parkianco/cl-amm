@@ -33,4 +33,6 @@ fee collection, and swap execution with slippage protection."
                 :serial t
                 :components ((:file "amm-test"))))
   :perform (test-op (op c)
-             (uiop:symbol-call :cl-amm/test :run-tests)))
+             (let ((result (uiop:symbol-call :cl-amm/test :run-tests)))
+               (unless result
+                 (error "Tests failed")))))
