@@ -3,9 +3,9 @@
 ;;;;
 ;;;; cl-amm.asd - Automated Market Maker System Definition
 
-(defsystem #:cl-amm
+(asdf:defsystem #:cl-amm
   :name "cl-amm"
-  :version "1.0.0"
+  :version "0.1.0"
   :author "Parkian Company LLC"
   :license "BSD-3-Clause"
   :description "Constant Product Automated Market Maker (x*y=k)"
@@ -19,11 +19,11 @@ fee collection, and swap execution with slippage protection."
                 :serial t
                 :components ((:file "types")
                              (:file "amm"))))
-  :in-order-to ((test-op (test-op #:cl-amm/test))))
+  :in-order-to ((asdf:test-op (test-op #:cl-amm/test))))
 
-(defsystem #:cl-amm/test
+(asdf:defsystem #:cl-amm/test
   :name "cl-amm/test"
-  :version "1.0.0"
+  :version "0.1.0"
   :author "Parkian Company LLC"
   :license "BSD-3-Clause"
   :description "Tests for cl-amm"
@@ -32,7 +32,7 @@ fee collection, and swap execution with slippage protection."
   :components ((:module "test"
                 :serial t
                 :components ((:file "amm-test"))))
-  :perform (test-op (op c)
+  :perform (asdf:test-op (op c)
              (let ((result (uiop:symbol-call :cl-amm/test :run-tests)))
                (unless result
                  (error "Tests failed")))))
